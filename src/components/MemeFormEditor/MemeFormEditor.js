@@ -6,7 +6,7 @@ import Button from '../Button/Button';
 
 class MemeFormEditor extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);//on met les props sur la classe on peut y accéder ailleurs via this.props
     //this.state = { selectedImg: { url: undefined, id: undefined }, texts: [], temporaryText: { x: 50, y: 0, value: "", fontSize: 10 } }
     this.state = this.props.store.getState();
     props.store.subscribe(() => {
@@ -14,24 +14,31 @@ class MemeFormEditor extends React.Component {
     });
   }
   resetForm() {
-    this.setState({ selectedImg: { url: undefined, id: undefined }, temporaryText: { x: 50, y: 0, value: "", fontSize: 10 }, texts: [] });
+    this.props.store.dispatch({type: 'RESET_EDITOR'});
+
+    //@todo à vérifier => en fait pas nécessaire c'est le subscribe qui fait le taf
+    //this.setState(this.props.store.getState());
+
+    //this.setState({ selectedImg: { url: undefined, id: undefined }, temporaryText: { x: 50, y: 0, value: "", fontSize: 10 }, texts: [] });
   }
   saveMeme() {
-
-    console.log(this.state);
+    this.props.store.dispatch({type: 'SAVE_MEME', value:this.state});// pour avertir
   }
+
+  // @todo modifier this.state par this.props.store?
   render() {
     return (
       <form className={styles.MemeFormEditor} data-testid="MemeFormEditor" onSubmit={e=>{e.preventDefault(); this.saveMeme();}}>
         <h1>creer votre meme</h1>
         <ImageFlowLayout images={[]} onClick={(img) => { this.setState({ selectedImg: img }) }} />
-        <h2>Editez le text</h2>
-        <input type="text" name="temporaryText" value={this.state.temporaryText.value} onChange={e => this.setState({ temporaryText: { ...this.state.temporaryText, value: e.currentTarget.value } })} />
-        <h3>Positionnez texte</h3>
-        <br />x:<input type="number" min="0" step="1" value={this.state.temporaryText.x} onChange={e => this.setState({ temporaryText: { ...this.state.temporaryText, x: e.currentTarget.value } })} />
-        <br />y:<input type="number" min="0" step="1" value={this.state.temporaryText.y} onChange={e => this.setState({ temporaryText: { ...this.state.temporaryText, y: e.currentTarget.value } })} />
+        <h2>Editez le texte</h2>
+        <input type="text" name="temporaryText" value={this.state.temporaryText.value} 
+          onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, value:e.currentTarget.value}}})} />
+        <h3>Positionnez le texte</h3>
+        <br />x:<input type="number" min="0" step="1" value={this.state.temporaryText.x} onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, x:e.currentTarget.value}}})} />
+        <br />y:<input type="number" min="0" step="1" value={this.state.temporaryText.y} onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, y:e.currentTarget.value}}})} />
         <br />
-        <br />font size:<input type="number" min="0" step="1" max="20" value={this.state.temporaryText.x} onChange={e => this.setState({ temporaryText: { ...this.state.temporaryText, fontSize: e.currentTarget.value } })} />
+        <br />font size:<input type="number" min="0" step="1" max="20" value={this.state.temporaryText.fontSize} onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, fontSize:e.currentTarget.value}}})} />
         <br />
         <Button bgColor="skyblue" onClick={e => {
           this.setState({ texts: [...this.state.texts, this.state.temporaryText], temporaryText: { x: 0, y: 0, value: "" } })
