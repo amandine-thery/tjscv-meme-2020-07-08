@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 import styles from './MemeFormEditor.module.scss';
 import ImageFlowLayout from '../ImageFlowLayout/ImageFlowLayout';
 import Button from '../Button/Button';
+
 class MemeFormEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedImg: { url: undefined, id: undefined }, texts: [], temporaryText: { x: 50, y: 0, value: "", fontSize: 10 } }
+    //this.state = { selectedImg: { url: undefined, id: undefined }, texts: [], temporaryText: { x: 50, y: 0, value: "", fontSize: 10 } }
+    this.state = this.props.store.getState();
+    props.store.subscribe(() => {
+      this.setState(props.store.getState());
+    });
   }
   resetForm() {
     this.setState({ selectedImg: { url: undefined, id: undefined }, temporaryText: { x: 50, y: 0, value: "", fontSize: 10 }, texts: [] });
