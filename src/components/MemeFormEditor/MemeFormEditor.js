@@ -23,7 +23,7 @@ class MemeFormEditor extends React.Component {
   }
   saveMeme() {
     this.props.store.dispatch({type: 'ADD_TEMPORARY_TEXT'});
-    this.props.store.dispatch({type: 'SAVE_MEME', value:this.props.store.getState()});// pour avertir
+    this.props.store.dispatch({type: 'SAVE_MEME', value:this.props.store.getState()});
   }
 
   // @todo modifier this.state par this.props.store?
