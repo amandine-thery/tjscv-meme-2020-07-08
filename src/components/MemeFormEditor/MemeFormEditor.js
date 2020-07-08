@@ -32,13 +32,13 @@ class MemeFormEditor extends React.Component {
         <h1>Créer votre meme</h1>
         <ImageFlowLayout images={[]} onClick={(img) => { this.setState({ selectedImg: img }) }} />
         <h2>Editez le texte</h2>
-        <input type="text" name="temporaryText" value={this.state.temporaryText.value} 
+        <input type="text" name="temporaryText" value={this.props.store.getState().temporaryText.value} 
           onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, value:e.currentTarget.value}}})} />
         <h3>Positionnez le texte</h3>
-        <br />x:<input type="number" min="0" step="1" value={this.state.temporaryText.x} onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, x:e.currentTarget.value}}})} />
-        <br />y:<input type="number" min="0" step="1" value={this.state.temporaryText.y} onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, y:e.currentTarget.value}}})} />
+        <br />x:<input type="number" min="0" step="1" value={this.props.store.getState().temporaryText.x} onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, x:e.currentTarget.value}}})} />
+        <br />y:<input type="number" min="0" step="1" value={this.props.store.getState().temporaryText.y} onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, y:e.currentTarget.value}}})} />
         <br />
-        <br />font size:<input type="number" min="0" step="1" max="20" value={this.state.temporaryText.fontSize} onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, fontSize:e.currentTarget.value}}})} />
+        <br />font size:<input type="number" min="0" step="1" max="20" value={this.props.store.getState().temporaryText.fontSize} onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, fontSize:e.currentTarget.value}}})} />
         <br />
         <Button bgColor="skyblue" onClick={e => {
           //this.setState({ texts: [...this.state.texts, this.state.temporaryText], temporaryText: { x: 60, y: 60, value: "" } })
