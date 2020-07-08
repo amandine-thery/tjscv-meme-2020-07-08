@@ -7,7 +7,7 @@ import styles from './MemeSvgViewer.module.scss';
 
 const MemeSvgViewer = (props) => {
 
-  //hook
+  //utilisation d'un hook car nous ne sommes pas dans une classe
   const [state, setstate] = useState(props.store.getState());
   // Similaire à componentDidMount et componentDidUpdate :  
   useEffect(() => {   
