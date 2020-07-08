@@ -6,7 +6,8 @@ export function memeReducer(state=initialState, action) { //memeReducer pour per
     switch(action.type) { //on garde action.type pour redux
         // par exemple on pourrait faire 
         //case '@@INIT': break;
-        case 'ADD_TEMPORARY_TEXT': return {...state, texts:[...state.texts,state.temporaryText], temporaryText:{x:50,y:40,value:'',fontSize: '5'}};
+        // dans ADD_TEMPORARY_TEXT ...state.temporaryText ne fonctionne pas, essaie sans ... fonctionnait aussi.
+        case 'ADD_TEMPORARY_TEXT': return {...state, texts:[...state.texts,{...state.temporaryText}], temporaryText:{x:50,y:40,value:'',fontSize: '5'}};
         case 'RESET_EDITOR': return {...initialState};
         case 'ADD_TEXT': return {...state, texts:[...state.texts,action.value]};
         case 'SELECT_IMG': return {...state, selectedImg: action.value}; 
