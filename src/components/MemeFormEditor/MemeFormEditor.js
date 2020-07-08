@@ -41,7 +41,8 @@ class MemeFormEditor extends React.Component {
         <br />font size:<input type="number" min="0" step="1" max="20" value={this.state.temporaryText.fontSize} onChange={e => this.props.store.dispatch({type: 'SET_TEMPORARY_VALUES', value:{temporaryText: {...this.state.temporaryText, fontSize:e.currentTarget.value}}})} />
         <br />
         <Button bgColor="skyblue" onClick={e => {
-          this.setState({ texts: [...this.state.texts, this.state.temporaryText], temporaryText: { x: 60, y: 60, value: "" } })
+          //this.setState({ texts: [...this.state.texts, this.state.temporaryText], temporaryText: { x: 60, y: 60, value: "" } })
+          this.props.store.dispatch({type: 'ADD_TEMPORARY_TEXT'});
         }}>Ajouter</Button>
         <h2>Enregistrer meme</h2>
         <Button onClick={e => { this.resetForm() }} bgColor="lightgrey">Reinitialiser</Button>
