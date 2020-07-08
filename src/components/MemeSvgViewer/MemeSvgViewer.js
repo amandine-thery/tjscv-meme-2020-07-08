@@ -14,7 +14,9 @@ const MemeSvgViewer = (props) => (
   </svg>
 );
 
-MemeSvgViewer.propTypes = {};
+MemeSvgViewer.propTypes = {
+  meme: PropTypes.object.isRequired 
+};
 
 MemeSvgViewer.defaultProps = {};
 

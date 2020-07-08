@@ -17,7 +17,7 @@ class MemeFormEditor extends React.Component {
   }
   render() {
     return (
-      <form className={styles.MemeFormEditor} data-testid="MemeFormEditor">
+      <form className={styles.MemeFormEditor} data-testid="MemeFormEditor" onSubmit={e=>{e.preventDefault(); this.saveMeme();}}>
         <h1>creer votre meme</h1>
         <ImageFlowLayout images={[]} onClick={(img) => { this.setState({ selectedImg: img }) }} />
         <h2>Editez le text</h2>

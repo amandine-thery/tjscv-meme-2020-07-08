@@ -3,12 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 import MemeFormEditor from './components/MemeFormEditor/MemeFormEditor';
 import MemeSvgViewer from './components/MemeSvgViewer/MemeSvgViewer';
+import MemeNavBar from './components/MemeNavBar/MemeNavBar';
+import Banner from './components/Banner/Banner';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <>
+      <Banner></Banner>
+      <MemeNavBar />
+      <div className="App">
+        <MemeSvgViewer meme={{ selectedImg: { url: 'seigneur.jpg', id: 0 }, texts: [{ x: 50, y: 32, value: 'devenir pro react', fontSize: 10 }], temporaryText: { x: 50, y: 75, value: 'easy', fontSize: 10 } }} />
+        <MemeFormEditor />
+      </div>
+      <Footer></Footer>
+    </>
   );
 }
 
